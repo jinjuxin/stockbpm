@@ -3,76 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>模板 03</title>
+    <title>模板 03 - 产品落地页</title>
     <style>
-      :root {
-        --primary: #2563eb;
-        --bg: #f8fafc;
-        --text: #0f172a;
-      }
-      * { box-sizing: border-box; }
-      body {
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          "PingFang SC", "Microsoft YaHei", sans-serif;
-        background: var(--bg);
-        color: var(--text);
-      }
-      .container { width: min(1080px, 92%); margin: 0 auto; }
-      header {
-        background: linear-gradient(135deg, #1d4ed8, #3b82f6);
-        color: #fff;
-        padding: 18px 0;
-      }
-      nav { display: flex; justify-content: space-between; align-items: center; }
-      .menu { display: flex; gap: 16px; }
-      .menu a { color: #fff; text-decoration: none; }
-      .hero { padding: 56px 0 24px; text-align: center; }
-      .hero h1 { margin: 0 0 10px; font-size: clamp(1.8rem, 3vw, 2.8rem); }
-      .hero p { margin: 0 auto; max-width: 620px; color: #475569; }
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 14px;
-        margin: 30px 0;
-      }
-      .card {
-        background: #fff;
-        padding: 16px;
-        border-radius: 12px;
-        box-shadow: 0 8px 24px rgba(2,6,23,.08);
-      }
-      footer { text-align: center; color: #64748b; padding: 24px 0 30px; }
+      :root { --bg:#fffaf3; --text:#2c2215; --muted:#7b6d5a; --accent:#ea580c; --card:#fff; }
+      * { box-sizing:border-box; }
+      body { margin:0; font-family:"Microsoft YaHei",sans-serif; color:var(--text); background:linear-gradient(180deg,#fff3de,#fffaf3 45%); }
+      .wrap { width:min(1080px,92%); margin:0 auto; }
+      header { padding:20px 0; }
+      .hero { padding:42px 0 30px; text-align:center; }
+      .hero h1 { margin:0 0 14px; font-size:46px; }
+      .hero p { max-width:680px; margin:0 auto; color:var(--muted); line-height:1.8; }
+      .cta { display:flex; gap:12px; justify-content:center; margin-top:20px; }
+      .btn { padding:12px 20px; border-radius:12px; text-decoration:none; }
+      .btn.primary { background:var(--accent); color:#fff; }
+      .btn.secondary { background:#fff; color:var(--text); border:1px solid #f0d5bb; }
+      .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; padding:12px 0 40px; }
+      .card { background:rgba(255,255,255,.9); border-radius:18px; padding:24px; box-shadow:0 14px 30px rgba(234,88,12,.08); }
+      @media (max-width: 760px) { .cards { grid-template-columns:1fr; } .hero h1 { font-size:34px; } }
     </style>
   </head>
   <body>
-    <header>
-      <div class="container">
-        <nav>
-          <strong>Template BRAND</strong>
-          <div class="menu">
-            <a href="#">首页</a>
-            <a href="#">服务</a>
-            <a href="#">案例</a>
-            <a href="#">联系</a>
-          </div>
-        </nav>
-      </div>
-    </header>
-
-    <main class="container">
+    <header class="wrap"><strong>Flow Launch</strong></header>
+    <main class="wrap">
       <section class="hero">
-        <h1>响应式首页模板</h1>
-        <p>这是一个可复用的模板页面，适合企业官网、活动页、产品展示页快速起步。</p>
+        <h1>把审批流程做成一页就能讲清的产品模板</h1>
+        <p>适合产品介绍页、活动页或渠道投放页，首屏突出卖点，下面直接承接能力与价值说明。</p>
+        <div class="cta">
+          <a class="btn primary" href="#">申请试用</a>
+          <a class="btn secondary" href="#">查看演示</a>
+        </div>
       </section>
-
-      <section class="grid">
-        <article class="card"><h3>功能模块 A</h3><p>用于展示核心能力。</p></article>
-        <article class="card"><h3>功能模块 B</h3><p>用于展示服务亮点。</p></article>
-        <article class="card"><h3>功能模块 C</h3><p>用于展示客户价值。</p></article>
+      <section class="cards">
+        <article class="card"><h3>拖拽式建模</h3><p>快速配置节点、规则和审批路径。</p></article>
+        <article class="card"><h3>多端协同</h3><p>PC、移动端和消息通知统一联动。</p></article>
+        <article class="card"><h3>数据闭环</h3><p>全过程留痕，支持报表与审计追踪。</p></article>
       </section>
     </main>
-
-    <footer>© 2026 Template BRAND</footer>
   </body>
 </html>

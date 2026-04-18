@@ -3,76 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>模板 04</title>
+    <title>模板 04 - 登录页</title>
     <style>
-      :root {
-        --primary: #2563eb;
-        --bg: #f8fafc;
-        --text: #0f172a;
-      }
-      * { box-sizing: border-box; }
-      body {
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          "PingFang SC", "Microsoft YaHei", sans-serif;
-        background: var(--bg);
-        color: var(--text);
-      }
-      .container { width: min(1080px, 92%); margin: 0 auto; }
-      header {
-        background: linear-gradient(135deg, #1d4ed8, #3b82f6);
-        color: #fff;
-        padding: 18px 0;
-      }
-      nav { display: flex; justify-content: space-between; align-items: center; }
-      .menu { display: flex; gap: 16px; }
-      .menu a { color: #fff; text-decoration: none; }
-      .hero { padding: 56px 0 24px; text-align: center; }
-      .hero h1 { margin: 0 0 10px; font-size: clamp(1.8rem, 3vw, 2.8rem); }
-      .hero p { margin: 0 auto; max-width: 620px; color: #475569; }
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 14px;
-        margin: 30px 0;
-      }
-      .card {
-        background: #fff;
-        padding: 16px;
-        border-radius: 12px;
-        box-shadow: 0 8px 24px rgba(2,6,23,.08);
-      }
-      footer { text-align: center; color: #64748b; padding: 24px 0 30px; }
+      :root { --bg:#e8f0ff; --panel:#ffffff; --text:#15213a; --muted:#66738f; --accent:#4f46e5; }
+      * { box-sizing:border-box; }
+      body { margin:0; min-height:100vh; display:grid; place-items:center; font-family:"Microsoft YaHei",sans-serif; background:
+        radial-gradient(circle at top left,#c7d8ff,transparent 28%),
+        radial-gradient(circle at bottom right,#ddd6fe,transparent 32%),
+        var(--bg); color:var(--text); }
+      .shell { width:min(980px,92%); display:grid; grid-template-columns:1.1fr .9fr; background:rgba(255,255,255,.65); border-radius:28px; overflow:hidden; box-shadow:0 24px 60px rgba(79,70,229,.15); }
+      .intro { padding:42px; background:linear-gradient(160deg,#312e81,#4f46e5); color:#fff; }
+      .intro h1 { margin:0 0 12px; font-size:38px; }
+      .intro p { line-height:1.8; opacity:.9; }
+      .form { padding:42px; background:var(--panel); }
+      .field { margin-bottom:14px; }
+      label { display:block; margin-bottom:6px; color:var(--muted); }
+      input { width:100%; padding:12px 14px; border-radius:12px; border:1px solid #d6dcf0; }
+      button { width:100%; margin-top:8px; padding:12px 16px; border:0; border-radius:12px; background:var(--accent); color:#fff; font-size:16px; }
+      @media (max-width: 760px) { .shell { grid-template-columns:1fr; } }
     </style>
   </head>
   <body>
-    <header>
-      <div class="container">
-        <nav>
-          <strong>Template BRAND</strong>
-          <div class="menu">
-            <a href="#">首页</a>
-            <a href="#">服务</a>
-            <a href="#">案例</a>
-            <a href="#">联系</a>
-          </div>
-        </nav>
-      </div>
-    </header>
-
-    <main class="container">
-      <section class="hero">
-        <h1>响应式首页模板</h1>
-        <p>这是一个可复用的模板页面，适合企业官网、活动页、产品展示页快速起步。</p>
+    <main class="shell">
+      <section class="intro">
+        <h1>欢迎回到 StockBPM</h1>
+        <p>这个模板适合登录页、统一认证入口或内部系统访问页，布局简单，移动端也能直接适配。</p>
       </section>
-
-      <section class="grid">
-        <article class="card"><h3>功能模块 A</h3><p>用于展示核心能力。</p></article>
-        <article class="card"><h3>功能模块 B</h3><p>用于展示服务亮点。</p></article>
-        <article class="card"><h3>功能模块 C</h3><p>用于展示客户价值。</p></article>
+      <section class="form">
+        <h2>账号登录</h2>
+        <div class="field"><label>用户名</label><input type="text" placeholder="请输入用户名" /></div>
+        <div class="field"><label>密码</label><input type="password" placeholder="请输入密码" /></div>
+        <div class="field"><label>验证码</label><input type="text" placeholder="请输入验证码" /></div>
+        <button type="button">登录系统</button>
       </section>
     </main>
-
-    <footer>© 2026 Template BRAND</footer>
   </body>
 </html>

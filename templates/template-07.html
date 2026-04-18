@@ -3,76 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>模板 07</title>
+    <title>模板 07 - 个人中心</title>
     <style>
-      :root {
-        --primary: #2563eb;
-        --bg: #f8fafc;
-        --text: #0f172a;
-      }
-      * { box-sizing: border-box; }
-      body {
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          "PingFang SC", "Microsoft YaHei", sans-serif;
-        background: var(--bg);
-        color: var(--text);
-      }
-      .container { width: min(1080px, 92%); margin: 0 auto; }
-      header {
-        background: linear-gradient(135deg, #1d4ed8, #3b82f6);
-        color: #fff;
-        padding: 18px 0;
-      }
-      nav { display: flex; justify-content: space-between; align-items: center; }
-      .menu { display: flex; gap: 16px; }
-      .menu a { color: #fff; text-decoration: none; }
-      .hero { padding: 56px 0 24px; text-align: center; }
-      .hero h1 { margin: 0 0 10px; font-size: clamp(1.8rem, 3vw, 2.8rem); }
-      .hero p { margin: 0 auto; max-width: 620px; color: #475569; }
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 14px;
-        margin: 30px 0;
-      }
-      .card {
-        background: #fff;
-        padding: 16px;
-        border-radius: 12px;
-        box-shadow: 0 8px 24px rgba(2,6,23,.08);
-      }
-      footer { text-align: center; color: #64748b; padding: 24px 0 30px; }
+      :root { --bg:#f5f3ff; --text:#221b3d; --muted:#6c6490; --accent:#7c3aed; --card:#ffffff; }
+      * { box-sizing:border-box; }
+      body { margin:0; font-family:"Microsoft YaHei",sans-serif; background:var(--bg); color:var(--text); }
+      .wrap { width:min(1120px,92%); margin:0 auto; padding:30px 0 42px; }
+      .hero { display:grid; grid-template-columns:.9fr 1.1fr; gap:18px; }
+      .profile,.panel { background:var(--card); border-radius:22px; padding:26px; box-shadow:0 14px 30px rgba(124,58,237,.08); }
+      .avatar { width:76px; height:76px; border-radius:50%; background:linear-gradient(135deg,#a78bfa,#7c3aed); margin-bottom:14px; }
+      .list { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:18px; }
+      .item { background:#f7f5ff; border-radius:16px; padding:18px; }
+      .timeline { display:grid; gap:12px; margin-top:14px; }
+      .timeline div { padding:14px 16px; border-left:4px solid #c4b5fd; background:#faf8ff; border-radius:10px; }
+      @media (max-width: 760px) { .hero,.list { grid-template-columns:1fr; } }
     </style>
   </head>
   <body>
-    <header>
-      <div class="container">
-        <nav>
-          <strong>Template BRAND</strong>
-          <div class="menu">
-            <a href="#">首页</a>
-            <a href="#">服务</a>
-            <a href="#">案例</a>
-            <a href="#">联系</a>
-          </div>
-        </nav>
-      </div>
-    </header>
-
-    <main class="container">
+    <main class="wrap">
       <section class="hero">
-        <h1>响应式首页模板</h1>
-        <p>这是一个可复用的模板页面，适合企业官网、活动页、产品展示页快速起步。</p>
-      </section>
-
-      <section class="grid">
-        <article class="card"><h3>功能模块 A</h3><p>用于展示核心能力。</p></article>
-        <article class="card"><h3>功能模块 B</h3><p>用于展示服务亮点。</p></article>
-        <article class="card"><h3>功能模块 C</h3><p>用于展示客户价值。</p></article>
+        <aside class="profile">
+          <div class="avatar"></div>
+          <h2>张小青</h2>
+          <p>运营负责人 / 华东区</p>
+          <p>模板适合做个人工作台、员工中心或账号主页。</p>
+        </aside>
+        <section class="panel">
+          <h2>我的工作概览</h2>
+          <div class="list">
+            <div class="item"><strong>12</strong><p>待办任务</p></div>
+            <div class="item"><strong>4</strong><p>发起中流程</p></div>
+            <div class="item"><strong>96%</strong><p>本月及时率</p></div>
+          </div>
+          <div class="timeline">
+            <div>09:30 完成采购审批复核</div>
+            <div>11:10 发起仓储盘点流程</div>
+            <div>14:00 跟进合同盖章节点</div>
+          </div>
+        </section>
       </section>
     </main>
-
-    <footer>© 2026 Template BRAND</footer>
   </body>
 </html>

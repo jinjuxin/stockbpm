@@ -3,76 +3,50 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>模板 05</title>
+    <title>模板 05 - 定价页</title>
     <style>
-      :root {
-        --primary: #2563eb;
-        --bg: #f8fafc;
-        --text: #0f172a;
-      }
-      * { box-sizing: border-box; }
-      body {
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          "PingFang SC", "Microsoft YaHei", sans-serif;
-        background: var(--bg);
-        color: var(--text);
-      }
-      .container { width: min(1080px, 92%); margin: 0 auto; }
-      header {
-        background: linear-gradient(135deg, #1d4ed8, #3b82f6);
-        color: #fff;
-        padding: 18px 0;
-      }
-      nav { display: flex; justify-content: space-between; align-items: center; }
-      .menu { display: flex; gap: 16px; }
-      .menu a { color: #fff; text-decoration: none; }
-      .hero { padding: 56px 0 24px; text-align: center; }
-      .hero h1 { margin: 0 0 10px; font-size: clamp(1.8rem, 3vw, 2.8rem); }
-      .hero p { margin: 0 auto; max-width: 620px; color: #475569; }
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 14px;
-        margin: 30px 0;
-      }
-      .card {
-        background: #fff;
-        padding: 16px;
-        border-radius: 12px;
-        box-shadow: 0 8px 24px rgba(2,6,23,.08);
-      }
-      footer { text-align: center; color: #64748b; padding: 24px 0 30px; }
+      :root { --bg:#f6fff7; --text:#183024; --muted:#5b7a67; --accent:#16a34a; --card:#ffffff; }
+      * { box-sizing:border-box; }
+      body { margin:0; font-family:"Microsoft YaHei",sans-serif; background:var(--bg); color:var(--text); }
+      .wrap { width:min(1120px,92%); margin:0 auto; }
+      .hero { text-align:center; padding:54px 0 26px; }
+      .hero h1 { margin:0 0 12px; font-size:42px; }
+      .hero p { margin:0 auto; max-width:660px; color:var(--muted); }
+      .plans { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; padding-bottom:42px; }
+      .plan { background:var(--card); border-radius:22px; padding:26px; box-shadow:0 16px 34px rgba(22,163,74,.08); }
+      .plan.featured { transform:translateY(-8px); border:2px solid #86efac; }
+      .price { font-size:42px; font-weight:700; margin:16px 0; }
+      ul { padding-left:18px; color:var(--muted); line-height:1.9; }
+      .btn { display:inline-block; margin-top:14px; padding:11px 18px; border-radius:12px; background:var(--accent); color:#fff; text-decoration:none; }
+      @media (max-width: 760px) { .plans { grid-template-columns:1fr; } .plan.featured { transform:none; } }
     </style>
   </head>
   <body>
-    <header>
-      <div class="container">
-        <nav>
-          <strong>Template BRAND</strong>
-          <div class="menu">
-            <a href="#">首页</a>
-            <a href="#">服务</a>
-            <a href="#">案例</a>
-            <a href="#">联系</a>
-          </div>
-        </nav>
-      </div>
-    </header>
-
-    <main class="container">
+    <main class="wrap">
       <section class="hero">
-        <h1>响应式首页模板</h1>
-        <p>这是一个可复用的模板页面，适合企业官网、活动页、产品展示页快速起步。</p>
+        <h1>适合 SaaS 和系统采购的套餐模板</h1>
+        <p>用于展示版本差异、购买建议和交付范围，也可以改造成实施方案报价页。</p>
       </section>
-
-      <section class="grid">
-        <article class="card"><h3>功能模块 A</h3><p>用于展示核心能力。</p></article>
-        <article class="card"><h3>功能模块 B</h3><p>用于展示服务亮点。</p></article>
-        <article class="card"><h3>功能模块 C</h3><p>用于展示客户价值。</p></article>
+      <section class="plans">
+        <article class="plan">
+          <h3>基础版</h3>
+          <div class="price">¥1999</div>
+          <ul><li>10 条流程</li><li>基础审批规则</li><li>邮件通知</li></ul>
+          <a class="btn" href="#">选择方案</a>
+        </article>
+        <article class="plan featured">
+          <h3>专业版</h3>
+          <div class="price">¥5999</div>
+          <ul><li>不限流程数</li><li>表单与权限配置</li><li>统计报表</li></ul>
+          <a class="btn" href="#">优先购买</a>
+        </article>
+        <article class="plan">
+          <h3>旗舰版</h3>
+          <div class="price">¥12999</div>
+          <ul><li>多组织架构</li><li>接口集成</li><li>专属实施支持</li></ul>
+          <a class="btn" href="#">联系销售</a>
+        </article>
       </section>
     </main>
-
-    <footer>© 2026 Template BRAND</footer>
   </body>
 </html>

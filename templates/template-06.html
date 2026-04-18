@@ -3,76 +3,46 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>模板 06</title>
+    <title>模板 06 - 帮助中心</title>
     <style>
-      :root {
-        --primary: #2563eb;
-        --bg: #f8fafc;
-        --text: #0f172a;
-      }
-      * { box-sizing: border-box; }
-      body {
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          "PingFang SC", "Microsoft YaHei", sans-serif;
-        background: var(--bg);
-        color: var(--text);
-      }
-      .container { width: min(1080px, 92%); margin: 0 auto; }
-      header {
-        background: linear-gradient(135deg, #1d4ed8, #3b82f6);
-        color: #fff;
-        padding: 18px 0;
-      }
-      nav { display: flex; justify-content: space-between; align-items: center; }
-      .menu { display: flex; gap: 16px; }
-      .menu a { color: #fff; text-decoration: none; }
-      .hero { padding: 56px 0 24px; text-align: center; }
-      .hero h1 { margin: 0 0 10px; font-size: clamp(1.8rem, 3vw, 2.8rem); }
-      .hero p { margin: 0 auto; max-width: 620px; color: #475569; }
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 14px;
-        margin: 30px 0;
-      }
-      .card {
-        background: #fff;
-        padding: 16px;
-        border-radius: 12px;
-        box-shadow: 0 8px 24px rgba(2,6,23,.08);
-      }
-      footer { text-align: center; color: #64748b; padding: 24px 0 30px; }
+      :root { --bg:#f9fafb; --text:#111827; --muted:#6b7280; --accent:#0f766e; --card:#ffffff; }
+      * { box-sizing:border-box; }
+      body { margin:0; font-family:"Microsoft YaHei",sans-serif; color:var(--text); background:var(--bg); }
+      .wrap { width:min(1100px,92%); margin:0 auto; }
+      header { padding:36px 0 18px; }
+      h1 { margin:0 0 10px; font-size:40px; }
+      .search { background:#fff; border:1px solid #dbe4ea; border-radius:16px; padding:14px 16px; width:100%; }
+      .layout { display:grid; grid-template-columns:.8fr 1.2fr; gap:18px; padding:22px 0 40px; }
+      .sidebar,.content article { background:var(--card); border-radius:18px; padding:22px; }
+      .sidebar ul { padding-left:18px; line-height:2; color:var(--muted); }
+      .content { display:grid; gap:14px; }
+      .badge { display:inline-block; padding:4px 10px; border-radius:999px; background:#ccfbf1; color:var(--accent); font-size:12px; }
+      @media (max-width: 760px) { .layout { grid-template-columns:1fr; } }
     </style>
   </head>
   <body>
-    <header>
-      <div class="container">
-        <nav>
-          <strong>Template BRAND</strong>
-          <div class="menu">
-            <a href="#">首页</a>
-            <a href="#">服务</a>
-            <a href="#">案例</a>
-            <a href="#">联系</a>
-          </div>
-        </nav>
-      </div>
-    </header>
-
-    <main class="container">
-      <section class="hero">
-        <h1>响应式首页模板</h1>
-        <p>这是一个可复用的模板页面，适合企业官网、活动页、产品展示页快速起步。</p>
-      </section>
-
-      <section class="grid">
-        <article class="card"><h3>功能模块 A</h3><p>用于展示核心能力。</p></article>
-        <article class="card"><h3>功能模块 B</h3><p>用于展示服务亮点。</p></article>
-        <article class="card"><h3>功能模块 C</h3><p>用于展示客户价值。</p></article>
+    <main class="wrap">
+      <header>
+        <span class="badge">文档模板</span>
+        <h1>帮助中心与常见问题页</h1>
+        <input class="search" type="text" placeholder="搜索：流程新建、节点配置、消息通知..." />
+      </header>
+      <section class="layout">
+        <aside class="sidebar">
+          <h3>分类导航</h3>
+          <ul>
+            <li>快速上手</li>
+            <li>流程设计</li>
+            <li>权限与组织</li>
+            <li>消息与提醒</li>
+          </ul>
+        </aside>
+        <div class="content">
+          <article><h3>如何创建第一条流程？</h3><p>可放置图文说明、步骤列表和演示视频入口。</p></article>
+          <article><h3>节点超时如何处理？</h3><p>适合用来承接异常处理、预警和升级机制说明。</p></article>
+          <article><h3>接口接入要准备什么？</h3><p>用于沉淀 API 文档、字段映射和权限要求。</p></article>
+        </div>
       </section>
     </main>
-
-    <footer>© 2026 Template BRAND</footer>
   </body>
 </html>
