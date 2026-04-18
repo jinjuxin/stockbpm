@@ -46,3 +46,5 @@
 - `skills/01-需求澄清-skill骨架.md`
 - `skills/02-技术方案-skill骨架.md`
 - `skills/03-测试验收-skill骨架.md`
+
+说的
