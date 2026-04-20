@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>工单系统 MVP 预览</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">TK</div>
+          <div>
+            <strong>工单系统 MVP</strong>
+            <p>可直接预览的前端闭环版本</p>
+          </div>
+        </div>
+
+        <nav class="nav">
+          <button class="nav-btn active" data-view="dashboard">总览</button>
+          <button class="nav-btn" data-view="tickets">工单列表</button>
+          <button class="nav-btn" data-view="create">新建工单</button>
+        </nav>
+
+        <section class="panel">
+          <label for="roleSelect">当前角色</label>
+          <select id="roleSelect">
+            <option value="submitter">提交人</option>
+            <option value="assignee">处理人</option>
+            <option value="admin">管理员</option>
+          </select>
+          <p id="roleHint" class="panel-note"></p>
+        </section>
+
+        <section class="panel">
+          <label for="userSelect">当前用户</label>
+          <select id="userSelect"></select>
+          <p class="panel-note">列表范围和可操作按钮会根据角色与用户自动切换。</p>
+        </section>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h1 id="pageTitle">工单系统总览</h1>
+            <p id="pageSubtitle">先跑通一套可演示的工单闭环。</p>
+          </div>
+          <div class="topbar-actions">
+            <button id="resetBtn" class="btn btn-soft" type="button">重置示例数据</button>
+            <button id="newTicketBtn" class="btn btn-primary" type="button">新建工单</button>
+          </div>
+        </header>
+
+        <section id="flash" class="flash hidden"></section>
+
+        <section class="view" data-view="dashboard">
+          <div class="hero-card">
+            <div>
+              <span class="eyebrow">MVP 演示</span>
+              <h2>从创建到关闭的最小闭环已经具备</h2>
+              <p>
+                当前版本支持角色切换、工单创建、列表过滤、详情查看、管理员分派、顺序状态流转，
+                以及本地持久化保存。
+              </p>
+              <div class="hero-actions">
+                <button class="btn btn-primary jump-view" data-view="create" type="button">立即创建工单</button>
+                <button class="btn btn-soft jump-view" data-view="tickets" type="button">查看工单列表</button>
+              </div>
+            </div>
+            <div class="stats" id="statsGrid"></div>
+          </div>
+
+          <div class="dashboard-grid">
+            <section class="card">
+              <div class="card-header">
+                <h3>我的待处理</h3>
+                <button class="text-btn jump-view" data-view="tickets" type="button">去处理</button>
+              </div>
+              <div id="myQueue" class="list-stack"></div>
+            </section>
+
+            <section class="card">
+              <div class="card-header">
+                <h3>最近动态</h3>
+              </div>
+              <div id="activityList" class="list-stack"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view hidden" data-view="tickets">
+          <section class="card">
+            <div class="card-header">
+              <h3>筛选条件</h3>
+              <button id="clearFiltersBtn" class="text-btn" type="button">清空筛选</button>
+            </div>
+            <div class="filters-grid">
+              <div>
+                <label for="searchInput">标题关键词</label>
+                <input id="searchInput" type="text" placeholder="搜索标题或编号" />
+              </div>
+              <div>
+                <label for="statusFilter">状态</label>
+                <select id="statusFilter">
+                  <option value="">全部</option>
+                </select>
+              </div>
+              <div>
+                <label for="priorityFilter">优先级</label>
+                <select id="priorityFilter">
+                  <option value="">全部</option>
+                </select>
+              </div>
+              <div>
+                <label for="assigneeFilter">处理人</label>
+                <select id="assigneeFilter">
+                  <option value="">全部</option>
+                </select>
+              </div>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="card-header">
+              <h3>工单列表</h3>
+              <span id="ticketCount" class="caption"></span>
+            </div>
+            <div id="ticketsTableWrap"></div>
+          </section>
+        </section>
+
+        <section class="view hidden" data-view="create">
+          <section class="card">
+            <div class="card-header">
+              <h3>新建工单</h3>
+              <span class="caption">提交人只录入必要信息，编号和时间自动生成。</span>
+            </div>
+            <form id="ticketForm" class="form-grid">
+              <div class="full">
+                <label for="titleInput">标题</label>
+                <input id="titleInput" name="title" type="text" required />
+              </div>
+              <div class="full">
+                <label for="contentInput">内容</label>
+                <textarea id="contentInput" name="content" rows="7" required></textarea>
+              </div>
+              <div>
+                <label for="priorityInput">优先级</label>
+                <select id="priorityInput" name="priority"></select>
+              </div>
+              <div>
+                <label for="submitterDisplay">提交人</label>
+                <input id="submitterDisplay" type="text" readonly />
+              </div>
+              <div>
+                <label for="statusDisplay">初始状态</label>
+                <input id="statusDisplay" type="text" value="待处理" readonly />
+              </div>
+              <div>
+                <label for="createdAtDisplay">创建时间</label>
+                <input id="createdAtDisplay" type="text" value="提交后自动生成" readonly />
+              </div>
+              <div class="full form-actions">
+                <button class="btn btn-primary" type="submit">提交工单</button>
+                <button id="fillDemoBtn" class="btn btn-soft" type="button">填入示例内容</button>
+              </div>
+            </form>
+          </section>
+        </section>
+
+        <section class="view hidden" data-view="detail">
+          <div id="detailWrap"></div>
+        </section>
+      </main>
+    </div>
+
+    <template id="emptyStateTpl">
+      <div class="empty-state">
+        <strong>当前没有符合条件的工单</strong>
+        <p>你可以调整筛选条件，或者先新建一张工单。</p>
+      </div>
+    </template>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

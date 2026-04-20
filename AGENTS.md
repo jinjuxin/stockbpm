@@ -1,24 +1,19 @@
 # AGENTS.md
 
-## Project overview
-- Backend: Java 17, Maven, Spring Boot / Spring Cloud
-- Frontend: Vue3 + pnpm
-- DB: MySQL
-- Registry/config: Nacos
+## 仓库定位
 
-## Rules
-- Do not change package structure unless required
-- Prefer incremental changes
-- Keep old APIs backward compatible
-- Add tests for new service logic when possible
-- Never modify production config files directly
+这是一个 AI 流程协作仓库，不是完整生产项目。
 
-## Common commands
-- Backend build: mvn -q -DskipTests package
-- Backend test: mvn test
-- Frontend install: pnpm install
-- Frontend build: pnpm build
+当前核心区域：
+- `应用/`：可运行示例系统
+- `文档/`：流程、规范、模板、需求产物
+- `智能体/`：主控智能体定义
+- `技能/`：阶段技能定义
 
-## Scope rules
-- For backend tasks, change only affected modules
-- For frontend tasks, do not redesign unrelated pages
+## 约束
+
+- 新需求统一放到 `文档/需求/<需求编号-名称>/`
+- 可运行系统统一放到 `应用/`
+- 优先使用中文命名
+- 不再恢复旧的多智能体重复结构
+- 主控负责阶段判断，技能负责具体执行

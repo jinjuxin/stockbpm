@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>需求-003 页面结构图预览</title>
+    <style>
+      :root {
+        --bg: #f3f6fb;
+        --card: #ffffff;
+        --text: #172033;
+        --muted: #5b6b84;
+        --brand: #1d4ed8;
+        --line: #d9e3f0;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Microsoft YaHei", sans-serif;
+        background: radial-gradient(circle at top, #f8fbff, var(--bg) 62%);
+        color: var(--text);
+      }
+      .wrap {
+        width: min(1440px, 96vw);
+        margin: 0 auto;
+        padding: 24px 0 40px;
+      }
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 18px;
+      }
+      .title h1 {
+        margin: 0 0 6px;
+        font-size: 30px;
+      }
+      .title p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 15px;
+      }
+      .actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      button {
+        border: 0;
+        border-radius: 12px;
+        background: #e8f0ff;
+        color: var(--brand);
+        padding: 10px 14px;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        box-shadow: 0 18px 42px rgba(34, 71, 135, 0.08);
+        padding: 20px;
+      }
+      .stage {
+        overflow: auto;
+        min-height: 760px;
+      }
+      .diagram-shell {
+        width: max-content;
+        min-width: 100%;
+        transform-origin: top center;
+        transition: transform 0.18s ease;
+      }
+      .mermaid {
+        padding: 24px;
+      }
+      @media (max-width: 900px) {
+        .topbar {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .stage {
+          min-height: 620px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="topbar">
+        <div class="title">
+          <h1>页面结构图</h1>
+          <p>需求-003 / 脱骨侠集团官网 / 高清预览版</p>
+        </div>
+        <div class="actions">
+          <button type="button" data-scale="down">缩小</button>
+          <button type="button" data-scale="reset">重置</button>
+          <button type="button" data-scale="up">放大</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="stage">
+          <div class="diagram-shell" id="diagram-shell">
+            <pre class="mermaid">
+flowchart LR
+    A["首页"] --> B["集团介绍"]
+    A --> C["业务板块"]
+    A --> D["新闻中心"]
+    A --> E["社会责任"]
+    A --> F["招聘"]
+    A --> G["联系我们"]
+
+    B --> B1["企业简介"]
+    B --> B2["品牌故事"]
+    B --> B3["发展历程"]
+    B --> B4["企业文化"]
+
+    C --> C1["产品展示"]
+    C --> C2["业务能力"]
+    C --> C3["市场覆盖"]
+
+    D --> D1["新闻列表"]
+    D --> D2["新闻详情"]
+
+    E --> E1["责任主题"]
+    E --> E2["责任详情"]
+
+    F --> F1["招聘介绍"]
+    F --> F2["岗位入口"]
+
+    G --> G1["联系信息"]
+    G --> G2["咨询方式"]
+            </pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: "base",
+        flowchart: {
+          useMaxWidth: false,
+          htmlLabels: true,
+          curve: "basis",
+          nodeSpacing: 44,
+          rankSpacing: 58
+        },
+        themeVariables: {
+          fontFamily: "Microsoft YaHei, sans-serif",
+          fontSize: "22px",
+          primaryColor: "#eef4ff",
+          primaryTextColor: "#172033",
+          primaryBorderColor: "#b8c9e8",
+          lineColor: "#7390c8",
+          secondaryColor: "#f8fbff",
+          tertiaryColor: "#ffffff"
+        }
+      });
+
+      let scale = 1;
+      const shell = document.getElementById("diagram-shell");
+
+      function applyScale() {
+        shell.style.transform = `scale(${scale})`;
+      }
+
+      document.querySelectorAll("[data-scale]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const action = button.dataset.scale;
+          if (action === "up") scale = Math.min(2.2, +(scale + 0.15).toFixed(2));
+          if (action === "down") scale = Math.max(0.7, +(scale - 0.15).toFixed(2));
+          if (action === "reset") scale = 1;
+          applyScale();
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>工单系统原型 - 分派页</title>
+    <style>
+      :root {
+        --bg: #f4f7fb;
+        --card: #ffffff;
+        --text: #162033;
+        --muted: #64748b;
+        --line: #dbe3ef;
+        --brand: #2563eb;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Microsoft YaHei", sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(37,99,235,.10), transparent 25%),
+          var(--bg);
+        color: var(--text);
+      }
+      .wrap { width: min(860px, 94%); margin: 0 auto; padding: 36px 0 44px; }
+      .card {
+        background: var(--card);
+        border-radius: 24px;
+        padding: 30px;
+        box-shadow: 0 16px 38px rgba(37, 99, 235, 0.08);
+      }
+      h1 { margin: 0 0 10px; font-size: 30px; }
+      .meta {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin: 20px 0;
+      }
+      .field {
+        padding: 14px;
+        border-radius: 14px;
+        background: #f8fbff;
+        border: 1px solid #e2e8f0;
+      }
+      .field span { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+      label { display: block; margin-bottom: 6px; color: var(--muted); }
+      select, textarea {
+        width: 100%;
+        padding: 11px 12px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        font: inherit;
+      }
+      textarea { min-height: 100px; resize: vertical; }
+      .hint {
+        margin: 16px 0;
+        padding: 14px 16px;
+        border-radius: 14px;
+        background: #eff6ff;
+        color: #1d4ed8;
+      }
+      .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
+      .btn {
+        display: inline-block;
+        padding: 11px 16px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-size: 14px;
+      }
+      .btn-primary { background: var(--brand); color: #fff; }
+      .btn-soft { background: #eaf2ff; color: var(--brand); }
+      @media (max-width: 720px) { .meta { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <section class="card">
+        <h1>管理员分派处理人</h1>
+        <p class="muted">仅管理员可见。用于首次分派或重新指定处理人。</p>
+
+        <div class="meta">
+          <div class="field"><span>工单编号</span><strong>TK20260419-001</strong></div>
+          <div class="field"><span>当前状态</span><strong>处理中</strong></div>
+          <div class="field"><span>标题</span><strong>库存同步失败导致数据延迟</strong></div>
+          <div class="field"><span>当前处理人</span><strong>王处理</strong></div>
+        </div>
+
+        <div class="hint">
+          规则：未选择处理人不能提交；重新分派后详情页应展示新的处理人；管理员可继续推进状态。
+        </div>
+
+        <div>
+          <label>选择处理人</label>
+          <select>
+            <option>请选择处理人</option>
+            <option selected>王处理</option>
+            <option>李跟进</option>
+            <option>赵支持</option>
+          </select>
+        </div>
+
+        <div style="margin-top: 14px;">
+          <label>分派备注</label>
+          <textarea>请优先检查同步任务日志与缓存刷新逻辑，今天内给出处理结果。</textarea>
+        </div>
+
+        <div class="actions">
+          <a class="btn btn-primary" href="./详情页.html">确认分派</a>
+          <a class="btn btn-soft" href="./详情页.html">取消返回</a>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>工单系统 MVP - 工单列表</title>
+    <style>
+      :root {
+        --bg: #f3f6fb;
+        --card: #ffffff;
+        --text: #162033;
+        --muted: #64748b;
+        --line: #dbe3ef;
+        --brand: #2563eb;
+        --brand-soft: #eaf2ff;
+        --warn: #f59e0b;
+        --danger: #dc2626;
+        --ok: #16a34a;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Microsoft YaHei", sans-serif;
+        background: linear-gradient(180deg, #eef4ff 0%, var(--bg) 30%);
+        color: var(--text);
+      }
+      .wrap { width: min(1180px, 94%); margin: 0 auto; }
+      .topbar {
+        padding: 24px 0 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .brand { font-size: 24px; font-weight: 700; }
+      .muted { color: var(--muted); }
+      .hero, .filters, .table-card { background: var(--card); border-radius: 20px; box-shadow: 0 14px 32px rgba(37, 99, 235, 0.08); }
+      .hero {
+        padding: 28px;
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 18px;
+        margin-bottom: 18px;
+      }
+      .hero h1 { margin: 0 0 10px; font-size: 34px; }
+      .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+      .btn {
+        display: inline-block;
+        padding: 11px 16px;
+        border-radius: 12px;
+        text-decoration: none;
+        border: 1px solid transparent;
+        font-size: 14px;
+      }
+      .btn-primary { background: var(--brand); color: #fff; }
+      .btn-soft { background: var(--brand-soft); color: var(--brand); }
+      .panel {
+        padding: 20px;
+        border-radius: 18px;
+        background: #f8fbff;
+        border: 1px solid #dbeafe;
+      }
+      .panel ul { margin: 12px 0 0; padding-left: 18px; color: var(--muted); }
+      .filters {
+        padding: 20px;
+        margin-bottom: 18px;
+      }
+      .filters-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+        margin-top: 14px;
+      }
+      label { display: block; margin-bottom: 6px; font-size: 13px; color: var(--muted); }
+      input, select {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: #fff;
+      }
+      .table-card { padding: 18px 18px 10px; margin-bottom: 30px; }
+      .role-tabs {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 14px;
+      }
+      .chip {
+        padding: 7px 12px;
+        border-radius: 999px;
+        background: #eef2ff;
+        color: #4338ca;
+        font-size: 13px;
+      }
+      .chip.active { background: #dbeafe; color: var(--brand); }
+      table { width: 100%; border-collapse: collapse; }
+      th, td {
+        text-align: left;
+        padding: 14px 10px;
+        border-bottom: 1px solid #edf2f7;
+        font-size: 14px;
+      }
+      th { color: var(--muted); font-weight: 600; }
+      .tag {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+      }
+      .p-high { background: #fef3c7; color: #92400e; }
+      .p-urgent { background: #fee2e2; color: #991b1b; }
+      .s-wait { background: #e0f2fe; color: #075985; }
+      .s-work { background: #ede9fe; color: #5b21b6; }
+      .s-done { background: #dcfce7; color: #166534; }
+      .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+      .link { color: var(--brand); text-decoration: none; }
+      .danger { color: var(--danger); }
+      @media (max-width: 860px) {
+        .hero, .filters-grid { grid-template-columns: 1fr; }
+        table, thead, tbody, th, td, tr { display: block; }
+        thead { display: none; }
+        tr {
+          padding: 12px 0;
+          border-bottom: 1px solid #edf2f7;
+        }
+        td {
+          border-bottom: 0;
+          padding: 6px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="topbar">
+        <div>
+          <div class="brand">工单系统 MVP</div>
+          <div class="muted">原型页 01 / 工单列表</div>
+        </div>
+        <div class="muted">当前预览角色：管理员</div>
+      </div>
+
+      <section class="hero">
+        <div>
+          <h1>工单闭环从这里开始</h1>
+          <p class="muted">
+            列表页承担查询、进入详情、创建工单、管理员分派入口。当前原型按角色区分数据范围：
+            提交人只看自己提交的工单，处理人只看分派给自己的工单，管理员可看全部。
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="./新建页.html">新建工单</a>
+            <a class="btn btn-soft" href="./详情页.html">查看详情原型</a>
+            <a class="btn btn-soft" href="./分派页.html">查看分派原型</a>
+          </div>
+        </div>
+        <div class="panel">
+          <strong>本页确认点</strong>
+          <ul>
+            <li>列表字段：编号、标题、优先级、提交人、处理人、状态、创建时间</li>
+            <li>筛选项：标题、状态、优先级、处理人</li>
+            <li>管理员能查看全部并分派、处理</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="filters">
+        <strong>筛选区</strong>
+        <div class="filters-grid">
+          <div>
+            <label>标题关键词</label>
+            <input type="text" value="库存" />
+          </div>
+          <div>
+            <label>状态</label>
+            <select>
+              <option>全部</option>
+              <option selected>处理中</option>
+              <option>待处理</option>
+              <option>已完成</option>
+              <option>已关闭</option>
+            </select>
+          </div>
+          <div>
+            <label>优先级</label>
+            <select>
+              <option>全部</option>
+              <option>低</option>
+              <option selected>高</option>
+              <option>紧急</option>
+            </select>
+          </div>
+          <div>
+            <label>处理人</label>
+            <select>
+              <option>全部</option>
+              <option selected>王处理</option>
+              <option>李跟进</option>
+              <option>赵支持</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="table-card">
+        <div class="role-tabs">
+          <span class="chip">提交人视角</span>
+          <span class="chip">处理人视角</span>
+          <span class="chip active">管理员视角</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>工单编号</th>
+              <th>标题</th>
+              <th>优先级</th>
+              <th>提交人</th>
+              <th>处理人</th>
+              <th>状态</th>
+              <th>创建时间</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>TK20260418-001</td>
+              <td>库存同步失败导致数据延迟</td>
+              <td><span class="tag p-urgent">紧急</span></td>
+              <td>张提交</td>
+              <td>王处理</td>
+              <td><span class="tag s-work">处理中</span></td>
+              <td>2026-04-18 09:12</td>
+              <td>
+                <div class="actions">
+                  <a class="link" href="./详情页.html">查看详情</a>
+                  <a class="link" href="./分派页.html">分派</a>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>TK20260418-002</td>
+              <td>采购审批页面加载过慢</td>
+              <td><span class="tag p-high">高</span></td>
+              <td>李业务</td>
+              <td>李跟进</td>
+              <td><span class="tag s-wait">待处理</span></td>
+              <td>2026-04-18 10:06</td>
+              <td>
+                <div class="actions">
+                  <a class="link" href="./详情页.html">查看详情</a>
+                  <a class="link" href="./分派页.html">分派</a>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>TK20260418-003</td>
+              <td>客户导入已完成但未自动关闭</td>
+              <td><span class="tag p-high">高</span></td>
+              <td>赵业务</td>
+              <td>赵支持</td>
+              <td><span class="tag s-done">已完成</span></td>
+              <td>2026-04-18 11:24</td>
+              <td>
+                <div class="actions">
+                  <a class="link" href="./详情页.html">查看详情</a>
+                  <span class="muted danger">可关闭</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+  </body>
+</html>

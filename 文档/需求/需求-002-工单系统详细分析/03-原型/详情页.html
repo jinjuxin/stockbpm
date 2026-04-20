@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>工单系统原型 - 详情页</title>
+    <style>
+      :root {
+        --bg: #f4f7fb;
+        --card: #ffffff;
+        --text: #162033;
+        --muted: #64748b;
+        --line: #dbe3ef;
+        --brand: #2563eb;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Microsoft YaHei", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+      .wrap { width: min(1120px, 94%); margin: 0 auto; padding: 28px 0 40px; }
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+      .layout {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 18px;
+      }
+      .card {
+        background: var(--card);
+        border-radius: 22px;
+        padding: 26px;
+        box-shadow: 0 14px 32px rgba(37, 99, 235, 0.08);
+      }
+      h1 { margin: 0 0 10px; font-size: 30px; }
+      .summary-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin-top: 18px;
+      }
+      .summary-card {
+        padding: 18px;
+        border-radius: 16px;
+        background: linear-gradient(180deg, #f8fbff, #f2f7ff);
+        border: 1px solid #dbe6f5;
+      }
+      .summary-card span {
+        display: block;
+        color: var(--muted);
+        font-size: 12px;
+        margin-bottom: 10px;
+      }
+      .summary-card strong {
+        display: block;
+        font-size: 20px;
+      }
+      .meta {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-top: 14px;
+      }
+      .field {
+        padding: 16px;
+        border-radius: 16px;
+        background: #ffffff;
+        border: 1px solid #e5edf7;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.7);
+      }
+      .field span {
+        display: block;
+        color: var(--muted);
+        font-size: 12px;
+        margin-bottom: 8px;
+      }
+      .field strong {
+        display: block;
+        font-size: 18px;
+        line-height: 1.4;
+      }
+      .content {
+        margin-top: 18px;
+        padding: 18px;
+        border-radius: 16px;
+        background: #fbfdff;
+        border: 1px solid #edf2f7;
+        line-height: 1.8;
+      }
+      .tag {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+      }
+      .priority-urgent { background: #fee2e2; color: #991b1b; }
+      .status-processing { background: #ede9fe; color: #5b21b6; }
+      .section-title { margin: 0 0 12px; }
+      .action-list { display: grid; gap: 12px; }
+      .action {
+        padding: 16px;
+        border-radius: 16px;
+        background: #f8fbff;
+        border: 1px solid var(--line);
+      }
+      .btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+      .btn {
+        display: inline-block;
+        padding: 10px 14px;
+        border-radius: 12px;
+        text-decoration: none;
+        background: #eaf2ff;
+        color: var(--brand);
+        font-size: 14px;
+      }
+      .btn-primary { background: var(--brand); color: #fff; }
+      .btn-success { background: #dcfce7; color: #166534; }
+      @media (max-width: 820px) { .layout, .summary-grid, .meta { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="top">
+        <div>
+          <strong>工单系统</strong>
+          <div class="muted">原型页 03 / 详情页</div>
+        </div>
+        <div class="btns">
+          <a class="btn" href="./列表页.html">返回列表</a>
+          <a class="btn" href="./分派页.html">进入分派</a>
+        </div>
+      </div>
+
+      <div class="layout">
+        <section class="card">
+          <h1>库存同步失败导致数据延迟</h1>
+          <div class="muted">工单编号：TK20260419-001</div>
+
+          <div class="summary-grid">
+            <div class="summary-card">
+              <span>优先级</span>
+              <strong><span class="tag priority-urgent">紧急</span></strong>
+            </div>
+            <div class="summary-card">
+              <span>当前状态</span>
+              <strong><span class="tag status-processing">处理中</span></strong>
+            </div>
+          </div>
+
+          <div class="meta">
+            <div class="field"><span>提交人</span><strong>张提交</strong></div>
+            <div class="field"><span>处理人</span><strong>王处理</strong></div>
+            <div class="field"><span>创建时间</span><strong>2026-04-19 09:12</strong></div>
+            <div class="field"><span>可用流转</span><strong>处理中 -> 已完成</strong></div>
+          </div>
+
+          <div class="content">
+            凌晨库存同步任务执行后，前台列表仍显示旧数据，导致订单审核页面与库存看板数据不一致。
+            当前需要核查同步任务执行记录、缓存刷新逻辑以及库存查询接口的最新结果。
+          </div>
+        </section>
+
+        <aside class="card">
+          <h3 class="section-title">角色操作区</h3>
+          <div class="action-list">
+            <div class="action">
+              <strong>提交人视角</strong>
+              <p class="muted">只查看详情和处理进度，不可分派处理人，也不可修改状态。</p>
+            </div>
+            <div class="action">
+              <strong>处理人视角</strong>
+              <p class="muted">当前可执行“处理中 -> 已完成”，未分派时不可开始处理。</p>
+              <div class="btns">
+                <a class="btn btn-success" href="#">更新为已完成</a>
+              </div>
+            </div>
+            <div class="action">
+              <strong>管理员视角</strong>
+              <p class="muted">管理员可以查看全部工单，可重新分派处理人，也可直接推进状态。</p>
+              <div class="btns">
+                <a class="btn" href="./分派页.html">重新分派</a>
+                <a class="btn btn-primary" href="#">更新状态</a>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </body>
+</html>

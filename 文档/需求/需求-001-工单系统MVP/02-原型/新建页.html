@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>工单系统 MVP - 新建工单</title>
+    <style>
+      :root {
+        --bg: #f5f7fb;
+        --card: #ffffff;
+        --text: #162033;
+        --muted: #64748b;
+        --line: #dbe3ef;
+        --brand: #2563eb;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Microsoft YaHei", sans-serif;
+        background: linear-gradient(180deg, #eff6ff 0%, var(--bg) 40%);
+        color: var(--text);
+      }
+      .wrap { width: min(920px, 94%); margin: 0 auto; padding: 28px 0 40px; }
+      .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+      .card {
+        background: var(--card);
+        border-radius: 22px;
+        padding: 28px;
+        box-shadow: 0 14px 32px rgba(37, 99, 235, 0.08);
+      }
+      h1 { margin: 0 0 10px; font-size: 32px; }
+      .hint {
+        margin-top: 16px;
+        padding: 14px 16px;
+        border-radius: 14px;
+        background: #eff6ff;
+        color: #1d4ed8;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-top: 18px;
+      }
+      .full { grid-column: 1 / -1; }
+      label { display: block; margin-bottom: 6px; font-size: 13px; color: var(--muted); }
+      input, select, textarea {
+        width: 100%;
+        padding: 11px 12px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: #fff;
+        font: inherit;
+      }
+      textarea { min-height: 180px; resize: vertical; }
+      .readonly {
+        background: #f8fafc;
+        color: var(--muted);
+      }
+      .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
+      .btn {
+        display: inline-block;
+        padding: 11px 16px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-size: 14px;
+      }
+      .btn-primary { background: var(--brand); color: #fff; }
+      .btn-ghost { background: #eaf2ff; color: var(--brand); }
+      @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="top">
+        <div>
+          <strong>工单系统 MVP</strong>
+          <div class="muted">原型页 02 / 新建工单</div>
+        </div>
+        <a class="btn btn-ghost" href="./列表页.html">返回列表</a>
+      </div>
+
+      <section class="card">
+        <h1>提交新工单</h1>
+        <p class="muted">提交人创建工单时只录入必要信息，系统自动补齐编号、创建时间和默认状态。</p>
+
+        <div class="hint">
+          规则：标题与内容必填；优先级可选；状态默认“待处理”；处理人初始为空，后续由管理员分派。
+        </div>
+
+        <div class="grid">
+          <div class="full">
+            <label>标题</label>
+            <input type="text" value="库存同步失败导致数据延迟" />
+          </div>
+          <div class="full">
+            <label>内容</label>
+            <textarea>凌晨库存同步任务执行后，前台列表仍显示旧数据，影响订单审核，请尽快排查。</textarea>
+          </div>
+          <div>
+            <label>优先级</label>
+            <select>
+              <option>低</option>
+              <option>中</option>
+              <option selected>高</option>
+              <option>紧急</option>
+            </select>
+          </div>
+          <div>
+            <label>提交人</label>
+            <input class="readonly" type="text" value="张提交（当前登录用户）" readonly />
+          </div>
+          <div>
+            <label>状态</label>
+            <input class="readonly" type="text" value="待处理（系统默认）" readonly />
+          </div>
+          <div>
+            <label>创建时间</label>
+            <input class="readonly" type="text" value="提交后系统自动生成" readonly />
+          </div>
+        </div>
+
+        <div class="actions">
+          <a class="btn btn-primary" href="./详情页.html">提交并查看详情</a>
+          <a class="btn btn-ghost" href="./列表页.html">取消返回</a>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

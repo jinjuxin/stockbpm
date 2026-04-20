@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>需求-003 功能结构图预览</title>
+    <style>
+      :root {
+        --bg: #f3f6fb;
+        --card: #ffffff;
+        --text: #172033;
+        --muted: #5b6b84;
+        --brand: #1d4ed8;
+        --line: #d9e3f0;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Microsoft YaHei", sans-serif;
+        background: radial-gradient(circle at top, #f8fbff, var(--bg) 62%);
+        color: var(--text);
+      }
+      .wrap {
+        width: min(1440px, 96vw);
+        margin: 0 auto;
+        padding: 24px 0 40px;
+      }
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 18px;
+      }
+      .title h1 {
+        margin: 0 0 6px;
+        font-size: 30px;
+      }
+      .title p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 15px;
+      }
+      .actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      button {
+        border: 0;
+        border-radius: 12px;
+        background: #e8f0ff;
+        color: var(--brand);
+        padding: 10px 14px;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        box-shadow: 0 18px 42px rgba(34, 71, 135, 0.08);
+        padding: 20px;
+      }
+      .stage {
+        overflow: auto;
+        min-height: 760px;
+      }
+      .diagram-shell {
+        width: max-content;
+        min-width: 100%;
+        transform-origin: top center;
+        transition: transform 0.18s ease;
+      }
+      .mermaid {
+        padding: 24px;
+      }
+      @media (max-width: 900px) {
+        .topbar {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .stage {
+          min-height: 620px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="topbar">
+        <div class="title">
+          <h1>功能结构图</h1>
+          <p>需求-003 / 脱骨侠集团官网 / 高清预览版</p>
+        </div>
+        <div class="actions">
+          <button type="button" data-scale="down">缩小</button>
+          <button type="button" data-scale="reset">重置</button>
+          <button type="button" data-scale="up">放大</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="stage">
+          <div class="diagram-shell" id="diagram-shell">
+            <pre class="mermaid">
+flowchart TD
+    A["脱骨侠集团官网"] --> B["首页"]
+    A --> C["集团介绍"]
+    A --> D["业务板块"]
+    A --> E["新闻中心"]
+    A --> F["社会责任"]
+    A --> G["招聘"]
+    A --> H["联系我们"]
+    A --> I["双语切换"]
+
+    B --> B1["品牌主视觉"]
+    B --> B2["产品/业务实力"]
+    B --> B3["品牌摘要"]
+    B --> B4["栏目入口"]
+
+    C --> C1["企业简介"]
+    C --> C2["品牌故事"]
+    C --> C3["发展历程"]
+    C --> C4["企业文化"]
+
+    D --> D1["核心产品"]
+    D --> D2["业务布局"]
+    D --> D3["能力说明"]
+    D --> D4["市场覆盖"]
+
+    E --> E1["企业新闻"]
+    E --> E2["品牌动态"]
+    E --> E3["媒体内容"]
+
+    F --> F1["食品安全"]
+    F --> F2["公益行动"]
+    F --> F3["可持续发展"]
+
+    G --> G1["招聘说明"]
+    G --> G2["岗位入口"]
+
+    H --> H1["地址信息"]
+    H --> H2["联系电话"]
+    H --> H3["合作咨询"]
+
+    I --> I1["中文"]
+    I --> I2["越南语"]
+            </pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: "base",
+        flowchart: {
+          useMaxWidth: false,
+          htmlLabels: true,
+          curve: "basis",
+          nodeSpacing: 42,
+          rankSpacing: 58
+        },
+        themeVariables: {
+          fontFamily: "Microsoft YaHei, sans-serif",
+          fontSize: "22px",
+          primaryColor: "#eef4ff",
+          primaryTextColor: "#172033",
+          primaryBorderColor: "#b8c9e8",
+          lineColor: "#7390c8",
+          secondaryColor: "#f8fbff",
+          tertiaryColor: "#ffffff"
+        }
+      });
+
+      let scale = 1;
+      const shell = document.getElementById("diagram-shell");
+
+      function applyScale() {
+        shell.style.transform = `scale(${scale})`;
+      }
+
+      document.querySelectorAll("[data-scale]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const action = button.dataset.scale;
+          if (action === "up") scale = Math.min(2.2, +(scale + 0.15).toFixed(2));
+          if (action === "down") scale = Math.max(0.7, +(scale - 0.15).toFixed(2));
+          if (action === "reset") scale = 1;
+          applyScale();
+        });
+      });
+    </script>
+  </body>
+</html>
